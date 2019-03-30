@@ -327,7 +327,7 @@ class Observer
         $player = $observer->Player;
         if ($player != null and $this->Player->hasPermission("sac.admin"))
         {
-          $player->sendMessage(TextFormat::ESCAPE."$this->Colorized" . $newmsg);
+          $player->sendMessage($newmsg);
         }
       }
     }
@@ -337,7 +337,7 @@ class Observer
   {
     if ($this->GetConfigEntry("I-AM-WATCHING-YOU"))
     {
-      $this->Logger->debug(TextFormat::ESCAPE."$this->Colorized" . "[SAC] > $this->PlayerName is no longer watched...");
+      $this->Logger->debug(TextFormat::ESCAPE. "[SAC] > $this->PlayerName is no longer watched...");
     }
   }
 
@@ -346,7 +346,7 @@ class Observer
     $this->JoinCounter++;
     if ($this->GetConfigEntry("I-AM-WATCHING-YOU"))
     {
-      $this->Player->sendMessage(TextFormat::ESCAPE."$this->Colorized"."[SAC] > $this->PlayerName, I am watching you ...");
+      $this->Player->sendMessage(TextFormat::ESCAPE. "[SAC] > $this->PlayerName, I am watching you ...");
     }
   }
 
@@ -355,8 +355,8 @@ class Observer
     $this->JoinCounter++;
     if ($this->GetConfigEntry("I-AM-WATCHING-YOU"))
     {
-      $this->Player->sendMessage(TextFormat::ESCAPE."$this->Colorized"."[SAC] > $this->PlayerName, I am still watching you ...");
-      $this->Logger->debug      (TextFormat::ESCAPE."$this->Colorized"."[SAC] > $this->PlayerName joined this server $this->JoinCounter times since server start");
+      $this->Player->sendMessage(TextFormat::ESCAPE."[SAC] > $this->PlayerName, I am still watching you ...");
+      $this->Logger->debug      (TextFormat::ESCAPE."[SAC] > $this->PlayerName joined this server $this->JoinCounter times since server start");
     }
   }
 
@@ -411,7 +411,7 @@ class Observer
   {
     if($this->GetConfigEntry("Regen"))
     {
-      if ($this->Player->hasPermission("sac.regen")) return;
+      if ($this->Player->hasPermission("sac.regen" || $this->Player->hasPermission("pmessentials.heal.self"))) return;
       $Reason2 = $event->getRegainReason();
       $tick    = (double)$this->Server->getTick();
       $tps     = (double)$this->Server->getTicksPerSecond();
